@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────── */
+
+:root {
+  --gold-50: #fdf9ef;
+  --gold-100: #faf0d4;
+  --gold-300: #ecc567;
+  --gold-500: #c8881a;
+  --gold-700: #864f10;
+  --ivory: #f5f0e8;
+  --charcoal: #1a1a1a;
+  --charcoal-muted: #6b6b6b;
+
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+}
+
+/* ─── Base Reset ────────────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--charcoal);
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* ─── Typography ────────────────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+}
+
+/* ─── Gold Divider ──────────────────────────────────────────────────────── */
+
+.gold-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c8881a, transparent);
+  margin: 0 auto;
+}
+
+/* ─── Skeleton Loading ──────────────────────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0ece4 25%,
+    #e8e2d8 37%,
+    #f0ece4 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.8s ease infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f5f0e8; }
+::-webkit-scrollbar-thumb {
+  background: #c8881a;
+  border-radius: 3px;
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(200, 136, 26, 0.2);
+  color: #1a1a1a;
+}
+
+/* ─── Focus ─────────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #c8881a;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Transitions ───────────────────────────────────────────────────────── */
+
+.transition-luxury {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Product Card ──────────────────────────────────────────────────────── */
+
+.product-card-image {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-card-image {
+  transform: scale(1.04);
+}
+
+/* ─── Gold Button ───────────────────────────────────────────────────────── */
+
+.btn-gold {
+  @apply relative overflow-hidden bg-gold-500 text-white font-sans font-medium
+         tracking-widest text-xs uppercase px-8 py-4
+         transition-all duration-300;
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-gold:hover::before { opacity: 1; }
+.btn-gold:hover { box-shadow: 0 8px 24px rgba(200, 136, 26, 0.4); }
+
+/* ─── Outline Gold Button ───────────────────────────────────────────────── */
+
+.btn-outline-gold {
+  @apply border border-gold-500 text-gold-600 font-sans font-medium
+         tracking-widest text-xs uppercase px-8 py-4
+         transition-all duration-300;
+}
+
+.btn-outline-gold:hover {
+  @apply bg-gold-500 text-white;
+}
+
+/* ─── Input ─────────────────────────────────────────────────────────────── */
+
+.input-luxury {
+  @apply w-full border border-gray-200 bg-white px-4 py-3 text-sm font-sans
+         text-charcoal placeholder-gray-400
+         focus:border-gold-500 focus:ring-0 focus:outline-none
+         transition-colors duration-200;
+}
+
+/* ─── Page Transition ───────────────────────────────────────────────────── */
+
+.page-enter {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* ─── Utility Classes ────────────────────────────────────────────────────── */
+
+.text-balance { text-wrap: balance; }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
