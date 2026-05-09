@@ -14,8 +14,25 @@ const NAV = [
   { href: '/admin/customers', icon: Users, label: 'Customers' },
 ];
 
+import { useRouter } from 'next/navigation';
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
+  const handleLogout = async () => {
+    await fetch('/api/admin/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'logout' }),
+    });
+    router.push('/admin/login');
+    router.refresh();
+  };
 
   return (
     <div className="min-h-screen flex bg-gray-50">
@@ -64,7 +81,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Store size={16} />
             View Store
           </Link>
-          <button className="flex items-center gap-3 px-3 py-2 text-sm font-sans text-gray-400 hover:text-white transition-colors w-full">
+          <button 
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-3 py-2 text-sm font-sans text-gray-400 hover:text-white transition-colors w-full"
+          >
             <LogOut size={16} />
             Sign Out
           </button>
