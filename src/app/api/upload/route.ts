@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { uploadImage } from '@/lib/cloudinary';
 
 export async function POST(request: NextRequest) {
-  // Admin only
-  const adminToken = request.headers.get('x-admin-token');
-  if (adminToken !== process.env.ADMIN_SECRET_TOKEN) {
+  const session = request.cookies.get('admin_session');
+  if (!session || session.value !== process.env.ADMIN_SECRET_TOKEN) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

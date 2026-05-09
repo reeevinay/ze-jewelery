@@ -78,12 +78,10 @@ export default function ProductForm({ product, onSubmit }: ProductFormProps) {
       reader.onload = async (e) => {
         try {
           const base64 = e.target?.result as string;
-          const adminToken = process.env.NEXT_PUBLIC_ADMIN_SECRET_TOKEN ?? '';
           const res = await fetch('/api/upload', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'x-admin-token': adminToken,
             },
             body: JSON.stringify({ base64, folder: 'aurelius/products' }),
           });
