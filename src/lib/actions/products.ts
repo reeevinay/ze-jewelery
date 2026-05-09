@@ -116,7 +116,7 @@ export async function createProduct(data: ProductFormData) {
       ${validated.compare_price ?? null}, ${validated.category},
       ${validated.subcategory ?? null}, ${validated.material},
       ${validated.weight ?? null}, ${validated.dimensions ?? null},
-      ${validated.stock_qty}, ${JSON.stringify(validated.images)},
+      ${validated.stock_qty}, ${sql.json(validated.images)},
       ${validated.featured}, ${validated.is_active},
       ${validated.meta_title ?? null}, ${validated.meta_description ?? null}
     ) RETURNING *
@@ -142,7 +142,7 @@ export async function updateProduct(id: string, data: Partial<ProductFormData>) 
       category = COALESCE(${data.category ?? null}, category),
       material = COALESCE(${data.material ?? null}, material),
       stock_qty = COALESCE(${data.stock_qty ?? null}, stock_qty),
-      images = COALESCE(${data.images ? JSON.stringify(data.images) : null}, images),
+      images = COALESCE(${data.images ? sql.json(data.images) : null}, images),
       featured = COALESCE(${data.featured ?? null}, featured),
       is_active = COALESCE(${data.is_active ?? null}, is_active),
       updated_at = NOW()
