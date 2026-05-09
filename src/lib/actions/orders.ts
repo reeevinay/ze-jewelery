@@ -261,7 +261,7 @@ export async function getOrders(params?: {
   `;
 
   return {
-    orders: orders as Order[],
+    orders: orders as unknown as Order[],
     total: parseInt(String(count)),
   };
 }
@@ -283,7 +283,7 @@ export async function getOrderByNumber(orderNumber: string): Promise<Order | nul
     SELECT * FROM order_items WHERE order_id = ${order.id}
   `;
 
-  return { ...order, items } as Order;
+  return { ...order, items } as unknown as Order;
 }
 
 // ─── Update Order Status ───────────────────────────────────────────────────
@@ -296,7 +296,7 @@ export async function updateOrderStatus(id: string, status: OrderStatus) {
   `;
 
   revalidatePath('/admin/orders');
-  return order as Order;
+  return order as unknown as Order;
 }
 
 // ─── Admin Stats ───────────────────────────────────────────────────────────

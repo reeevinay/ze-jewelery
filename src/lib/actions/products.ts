@@ -83,7 +83,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   const result = await sql`
     SELECT * FROM products WHERE slug = ${slug} AND is_active = true LIMIT 1
   `;
-  return (result[0] as Product) ?? null;
+  return (result[0] as unknown as Product) ?? null;
 }
 
 // ─── Get Product by ID ─────────────────────────────────────────────────────
@@ -92,7 +92,7 @@ export async function getProductById(id: string): Promise<Product | null> {
   const result = await sql`
     SELECT * FROM products WHERE id = ${id} LIMIT 1
   `;
-  return (result[0] as Product) ?? null;
+  return (result[0] as unknown as Product) ?? null;
 }
 
 // ─── Create Product ────────────────────────────────────────────────────────
@@ -126,7 +126,7 @@ export async function createProduct(data: ProductFormData) {
   revalidatePath('/');
   revalidatePath('/admin/products');
 
-  return product as Product;
+  return product as unknown as Product;
 }
 
 // ─── Update Product ────────────────────────────────────────────────────────
@@ -151,10 +151,10 @@ export async function updateProduct(id: string, data: Partial<ProductFormData>) 
   `;
 
   revalidatePath('/shop');
-  revalidatePath(`/product/${(product as Product).slug}`);
+  revalidatePath(`/product/${(product as unknown as Product).slug}`);
   revalidatePath('/admin/products');
 
-  return product as Product;
+  return product as unknown as Product;
 }
 
 // ─── Delete Product ────────────────────────────────────────────────────────
@@ -190,7 +190,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     ORDER BY created_at DESC
     LIMIT 8
   `;
-  return result as Product[];
+  return result as unknown as Product[];
 }
 
 // ─── Get Related Products ──────────────────────────────────────────────────
@@ -204,5 +204,5 @@ export async function getRelatedProducts(productId: string, category: string): P
     ORDER BY RANDOM()
     LIMIT 4
   `;
-  return result as Product[];
+  return result as unknown as Product[];
 }
