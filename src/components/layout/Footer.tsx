@@ -15,7 +15,6 @@ const INFO_LINKS = [
   { label: 'Sustainability', href: '/sustainability' },
   { label: 'Care Guide', href: '/care-guide' },
   { label: 'Size Guide', href: '/size-guide' },
-  { label: 'Blog', href: '/blog' },
 ];
 
 const SUPPORT_LINKS = [
