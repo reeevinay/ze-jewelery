@@ -29,6 +29,5 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export const config = {
-  api: { bodyParser: { sizeLimit: '15mb' } },
-};
+// Route segment config (App Router)
+export const maxDuration = 30;
