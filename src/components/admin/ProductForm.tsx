@@ -107,11 +107,11 @@ export default function ProductForm({ product, onSubmit }: ProductFormProps) {
 
   function validate(): boolean {
     const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = 'Name is required';
-    if (!form.description.trim()) e.description = 'Description is required';
-    if (!form.short_description.trim()) e.short_description = 'Short description is required';
+    if (!form.name.trim() || form.name.length < 2) e.name = 'Name must be at least 2 characters';
+    if (!form.description.trim() || form.description.length < 10) e.description = 'Description must be at least 10 characters';
+    if (!form.short_description.trim() || form.short_description.length < 5) e.short_description = 'Short description must be at least 5 characters';
     if (form.price <= 0) e.price = 'Price must be greater than 0';
-    if (!form.material.trim()) e.material = 'Material is required';
+    if (!form.material.trim() || form.material.length < 2) e.material = 'Material must be at least 2 characters';
     if (form.stock_qty < 0) e.stock_qty = 'Stock cannot be negative';
     if (form.images.length === 0) e.images = 'At least one image is required';
     setErrors(e);
