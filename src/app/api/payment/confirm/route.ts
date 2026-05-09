@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       razorpaySignature,
     });
 
-    return NextResponse.json({ success: true, ...result });
+    return NextResponse.json({ ...result });
   } catch (err: any) {
     console.error('Payment confirmation error:', err);
     return NextResponse.json(
